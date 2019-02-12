@@ -12,6 +12,9 @@ public class CaroBoardCell {
             this.type = type;
         }
     }
+    public void reset(){
+        this.type = defaultType;
+    }
 
     final String defaultType = ".";
     String type = defaultType;
