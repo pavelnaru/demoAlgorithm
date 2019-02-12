@@ -58,7 +58,7 @@ public class CaroMain {
                 playAuto(markerCounter, x, y);
                 break;
             case "2":
-
+                playManual(markerCounter);
                 break;
             case "3":
                 test();
@@ -74,7 +74,16 @@ public class CaroMain {
 
     protected void drawBoardToConsole(){
         StringBuilder result = new StringBuilder();
+
+        // print column indexes
+        result.append(cellPadding + " " + cellPadding);
+        for (int i=0; i<boardSizeY; i++){
+            result.append(cellPadding +i + cellPadding);
+        }
+        result.append(System.lineSeparator());
+
         for (int colX=0 ; colX < boardSizeX; colX++){
+            result.append(cellPadding + colX + cellPadding);
             for(int colY=0 ; colY < boardSizeY; colY++){
                 result.append(cellPadding + board[colX][colY].getType() + cellPadding);
             }
@@ -104,6 +113,19 @@ public class CaroMain {
 //        }
 
     }
+    protected void playManual(int markerCounter){
+        while (!(checkEnd() || checkWin()!=null)){
+            drawBoardToConsole();
+            System.out.print("Next move's X: ");
+            int x = Main.sc.nextInt();
+            System.out.print("Next move's Y: ");
+            int y = Main.sc.nextInt();
+            board[x][y].tick(markers[markerCounter++%markers.length]);
+        }
+
+
+    }
+
     protected boolean checkEnd(){
         boolean result= true;
         Pattern emptyCell = Pattern.compile("\\.+");
@@ -275,10 +297,21 @@ public class CaroMain {
     private void test(){
         System.out.println("calling tests");
         subTest(2,5,0,1, markers[0]);
+        subTest(2,5,0,1, markers[1]);
+
         subTest(2,5,1,0, markers[0]);
+        subTest(2,5,1,0, markers[1]);
+
         subTest(2,0,1,1, markers[0]);
+        subTest(2,0,1,1, markers[1]);
+
+        subTest(2,4,1,1, markers[0]);
         subTest(2,4,1,1, markers[1]);
+
         subTest(0,8,1,-1, markers[0]);
+        subTest(0,8,1,-1, markers[1]);
+
+        subTest(2,8,1,-1, markers[0]);
         subTest(2,8,1,-1, markers[1]);
 
 
