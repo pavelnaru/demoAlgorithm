@@ -63,6 +63,9 @@ public class CaroMain {
             case "3":
                 test();
                 break;
+            default:
+                playAuto(markerCounter, x, y);
+                break;
         }
 
 
