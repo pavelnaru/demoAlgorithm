@@ -116,11 +116,17 @@ public class CaroMain {
     protected void playManual(int markerCounter){
         while (!(checkEnd() || checkWin()!=null)){
             drawBoardToConsole();
-            System.out.print("Next move's X: ");
-            int x = Main.sc.nextInt();
-            System.out.print("Next move's Y: ");
-            int y = Main.sc.nextInt();
-            board[x][y].tick(markers[markerCounter++%markers.length]);
+            try {
+                System.out.print("Next move's X: ");
+                int x = Integer.parseInt( Main.sc.nextLine());
+                System.out.print("Next move's Y: ");
+                int y = Integer.parseInt( Main.sc.nextLine());
+                board[x][y].tick(markers[markerCounter++%markers.length]);
+            }catch (Exception ex){
+                System.out.printf("Error occured: %s\n", ex);
+            }
+
+
         }
 
 
